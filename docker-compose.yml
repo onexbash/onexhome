@@ -1,0 +1,39 @@
+services:
+  openldap:
+    image: osixia/openldap:1.5.0
+    command: ["--copy-service"]
+    container_name: onexhome-ldap
+    environment:
+      LDAP_LOG_LEVEL: "256"
+      LDAP_ORGANISATION: "onexhome"
+      LDAP_DOMAIN: "schlegel.one"
+      LDAP_BASE_DN: "dc=schlegel,dc=one"
+      LDAP_ADMIN_PASSWORD: ${LDAP_ADMIN_PASSWORD}
+      LDAP_CONFIG_PASSWORD: ${LDAP_CONFIG_PASSWORD}
+      LDAP_READONLY_USER: "false"
+      LDAP_READONLY_USER_USERNAME: "readonly"
+      LDAP_READONLY_USER_PASSWORD: ${LDAP_READONLY_PASSWORD}
+      # LDAP_RFC2307BIS_SCHEMA: "false"
+      LDAP_TLS: "false" # enable TLS
+      # LDAP_TLS_CRT_FILENAME: "ldap.crt"
+      # LDAP_TLS_KEY_FILENAME: "ldap.key"
+      # LDAP_TLS_DH_PARAM_FILENAME: "dhparam.pem"
+      # LDAP_TLS_CA_CRT_FILENAME: "ca.crt"
+      # LDAP_TLS_ENFORCE: "false"
+      # LDAP_TLS_CIPHER_SUITE: "SECURE256:-VERS-SSL3.0"
+      # LDAP_TLS_VERIFY_CLIENT: "demand"
+      # LDAP_REPLICATION: "false"
+      # KEEP_EXISTING_CONFIG: "false"
+      # LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+      # LDAP_SSL_HELPER_PREFIX: "ldap"
+    ports:
+      - "389:389"
+      - "636:636"
+    volumes:
+      - /var/lib/ldap
+      - /etc/ldap/slapd.d
+      - ./ldap/config/ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom
+    tty: true
+    stdin_open: true
+    domainname: "schlegel.one"
+    hostname: "onexhome-ldap"

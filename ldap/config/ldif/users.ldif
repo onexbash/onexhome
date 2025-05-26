@@ -1,0 +1,11 @@
+dn: uid=onexbash,ou=users,dc=schlegel,dc=one
+changetype: add
+uid: onexbash
+cn: onexbash
+objectClass: top
+objectClass: posixAccount
+objectClass: inetOrgPerson
+uidNumber: 10001
+gidNumber: 10001
+userPassword: {SSHA}sy05kUBN9ulKA9oecH/sqv53+oETXMN4
+mail: fabian@schlegel.one

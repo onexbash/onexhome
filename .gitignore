@@ -1,0 +1,10 @@
+# Secret Files
+.env
+!.env.template
+*.secret
+
+# Local Files
+.tmp/
+
+# System Files
+.DS_Store
